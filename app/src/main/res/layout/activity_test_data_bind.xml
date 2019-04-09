@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <data>
+        <import type="com.jf.databindingdemo.bean.UserBean"/>
+        <!--不同路径下有2个相同名字的类，那么给其中一个起一个别名，用alias表示-->
+        <import type="com.jf.databindingdemo.bean.user.UserBean" alias="UserBean2"/>
+        <variable
+            name ="user"
+            type="com.jf.databindingdemo.bean.UserBean" />
+        <variable
+            name ="user2"
+            type="UserBean2" />
+
+     </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{user.name}"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(user.age)}"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text='@{"iname:"+user2.name}'
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="include引用操作"
+            />
+        <ImageView
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:scaleType="centerCrop"
+            app:imageUrl="@{user.picUrl}"
+            >
+
+
+        </ImageView>
+        <include layout="@layout/name" app:user="@{user}"/>
+        <include layout="@layout/contact" app:user="@{user}"/>
+    </LinearLayout>
+
+</layout>
